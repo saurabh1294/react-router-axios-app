@@ -1,0 +1,32 @@
+{
+  "name": "reactaxios",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.1.1",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint:fix": "prettier --write --config ./prettier.config.js --list-different \"src/*{.js,.json}\"",
+    "mock": "concurrently -k \"node mocks/mock.server.js\" \"yarn start:mock\"",
+    "start:mock": "yarn start && nodemon --proxy-config mocks/proxy.conf.js --serve-path /faqs/ --live-reload false"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5",
+    "prettier": "1.13.7",
+    "concurrently": "^3.6.0",
+    "lint": "latest",
+    "cors": "^2.8.4"
+  }
+}
