@@ -1,27 +1,38 @@
 import React, { Component } from "react";
-import axios from "axios";
+//import axios from "axios";
 import "../App.css";
+import { connect } from 'react-redux'; 
+import { fetAllFAQS } from '../actions/actions';
 
-export default class FAQ extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { serverports: [] };
-  }
+export class FAQ extends Component {
+  state = {
+    totalFAQS: 0
+  };
+  // TODO - implement constructor if needed
+  // constructor(props) {
+  //   super(props);
+  // }
   componentDidMount() {
-    console.log("COMPONENT did mount index.js");
-    axios
-      .get("http://localhost:3456/faqs/public/api/v1/static/list")
-      .then(response => {
-        console.log("GOT CMS respone here", response);
-        this.setState({ serverports: response.data });
-      })
-      .catch(function(error) {
-        console.log(error);
-        console.log("HERE");
-      })
-      .then(response => {
-        console.log("finally here", response);
-      });
+    console.log("COMPONENT did mount FAQ.js");
+    this.props.fetAllFAQS().then((result) => {
+      console.log("then result", result);
+    })
+    .then(data => {
+       console.log(data, "finally");
+    });
+    // axios
+    //   .get("http://localhost:3456/faqs/public/api/v1/static/list")
+    //   .then(response => {
+    //     console.log("GOT CMS respone here", response);
+    //     this.setState({ serverports: response.data });
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //     console.log("HERE");
+    //   })
+    //   .then(response => {
+    //     console.log("finally here", response);
+    //   });
   }
   
   render() {
@@ -95,3 +106,11 @@ export default class FAQ extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {  
+  return {
+    data: state.data
+  };
+}
+
+export default connect(mapStateToProps, { fetAllFAQS })(FAQ); 

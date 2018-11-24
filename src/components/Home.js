@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 //import axios from "axios";
 
-import "../App.css";
+import '../App.css';
 
 export default class Home extends Component {
   constructor(props) {
