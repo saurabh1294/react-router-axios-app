@@ -1,40 +1,42 @@
 import React, { Component } from "react";
-//import axios from "axios";
+import { Switch, Route, Link } from "react-router-dom";
 import "../App.css";
 import { connect } from "react-redux";
 import { fetAllFAQS } from "../actions/actions";
 
 export class FAQ extends Component {
-  state = {
-    totalFAQS: 0
-  };
   // TODO - implement constructor if needed
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      response: {},
+      title: "",
+      body: ""
+    };
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState(
+      {
+        response: props.data
+      },
+      function() {
+        console.log("Received props from the reducer", this.state.response);
+        this.setState({ title: this.state.response[0].response.faqs[0].title });
+        this.setState({ body: this.state.response[0].response.faqs[0].body });
+      }
+    );
+  }
+
   componentDidMount() {
-    console.log("COMPONENT did mount FAQ.js");
-    this.props
-      .fetAllFAQS()
-      .then(result => {
-        console.log("then result", result);
-      })
-      .then(data => {
-        console.log(data, "finally");
-      });
-    // axios
-    //   .get("http://localhost:3456/faqs/public/api/v1/static/list")
-    //   .then(response => {
-    //     console.log("GOT CMS respone here", response);
-    //     this.setState({ serverports: response.data });
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //     console.log("HERE");
-    //   })
-    //   .then(response => {
-    //     console.log("finally here", response);
-    //   });
+    this.props.fetAllFAQS();
+  }
+
+  showFAQ(faqNum) {
+    this.setState({
+      title: this.state.response[0].response.faqs[faqNum].title
+    });
+    this.setState({ body: this.state.response[0].response.faqs[faqNum].body });
   }
 
   render() {
@@ -42,31 +44,27 @@ export class FAQ extends Component {
       <div className="container-fluid text-center">
         <div className="row content visible-lg visible-md visible-sm">
           <div className="col-sm-10 text-left">
-            <h1>Welcome</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat
-              cupidatat non proident, sunt in culpa qui officia deserunt mollit
-              anim id est laborum consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat.
-            </p>
+            <h1>{this.state.title}</h1>
+            <p>{this.state.body}</p>
             <hr />
             <h3>Test</h3>
             <p>Lorem ipsum...</p>
           </div>
           <div className="col-sm-2 sidenav">
             <p>
-              <a href="golibrary.co">Link1</a>
+              <Link to={"/faqs"} onClick={this.showFAQ.bind(1)}>
+                Link1
+              </Link>
             </p>
             <p>
-              <a href="golibrary.co">Link2</a>
+              <Link to={"/faqs"} onClick={this.showFAQ.bind(2)}>
+                Link2
+              </Link>
             </p>
             <p>
-              <a href="golibrary.co">Link3</a>
+              <Link to={"/faqs"} onClick={this.showFAQ.bind(3)}>
+                Link3
+              </Link>
             </p>
           </div>
         </div>
@@ -84,23 +82,16 @@ export class FAQ extends Component {
             </p>
           </div>
           <div className="col-sm-10 text-left">
-            <h1>Welcome</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat
-              cupidatat non proident, sunt in culpa qui officia deserunt mollit
-              anim id est laborum consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat.
-            </p>
+            <h1>{this.state.title}</h1>
+            <p>{this.state.body}</p>
             <hr />
             <h3>Test</h3>
             <p>Lorem ipsum...</p>
           </div>
         </div>
+        <Switch>
+          <Route path="/faqs" />
+        </Switch>
         <footer className="container-fluid text-center">
           <p>Copyright (c) Golibrary.co - 2018 - All rights reserved</p>
         </footer>
