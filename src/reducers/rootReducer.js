@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';  
-import faqReducer from './faqReducer';
+import { combineReducers } from "redux";
+import faqReducer from "./faqReducer";
 
- const rootReducer = combineReducers({
-   data: faqReducer,
- });
+const rootReducer = combineReducers({
+  data: faqReducer
+});
 
- export default rootReducer;
+export default rootReducer;

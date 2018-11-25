@@ -1,33 +1,14 @@
 import React, { Component } from "react";
-//import axios from "axios";
-
-import '../App.css';
+import "../App.css";
+import { FAQ } from "../components/FAQ";
+import { Switch, Route, Link } from "react-router-dom";
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.onChangeHostName = this.onChangeHostName.bind(this);
-    this.onChangePort = this.onChangePort.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-
-    this.state = {
-      name: "",
-      port: ""
-    };
-  }
-  onChangeHostName(e) {
-    this.setState({
-      name: e.target.value
-    });
-  }
-  onChangePort(e) {
-    this.setState({
-      port: e.target.value
-    });
-  }
-  onSubmit(e) {
-    // TODO implement this
-  }
+  // TODO uncomment this later when used
+  // constructor(props) {
+  //   super(props);
+  //   // TODO do initialization here
+  // }
 
   render() {
     return (
@@ -37,7 +18,7 @@ export default class Home extends Component {
             <div className="col-12">
               <h2>Search FAQs</h2>
             </div>
-            <form action="/hms/accommodations" method="GET">
+            <form action="/test" method="GET">
               <div className="col-12">
                 <div className="input-group">
                   <input
@@ -57,13 +38,16 @@ export default class Home extends Component {
           </div>
         </div>
         <div className="container-fluid bg-3 text-center">
-          <a href="eventznu.com">
+          <Link to={"/faqs"} className="nav-link">
             <h3>>Learn more</h3>
-          </a>
+          </Link>
         </div>
         <footer className="container-fluid text-center">
           <p>Copyright (c) Golibrary.co - 2018 - All rights reserved</p>
         </footer>
+        <Switch>
+          <Route path="/faqs" component={FAQ} />
+        </Switch>
       </div>
     );
   }

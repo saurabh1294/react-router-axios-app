@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint:fix": "prettier --write --config ./prettier.config.js --list-different \"src/*{.js,.json}\"",
+    "lint:fix": "prettier --write --config ./prettier.config.js --list-different \"{src,actions,components,reducers}/**/*{.js,.json}\"",
     "mock": "concurrently -k \"node mocks/mock.server.js\" \"yarn start:mock\"",
     "start:mock": "yarn start && nodemon --proxy-config mocks/proxy.conf.js --serve-path /faqs/ --live-reload false"
   },

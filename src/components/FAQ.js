@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 //import axios from "axios";
 import "../App.css";
-import { connect } from 'react-redux'; 
-import { fetAllFAQS } from '../actions/actions';
+import { connect } from "react-redux";
+import { fetAllFAQS } from "../actions/actions";
 
 export class FAQ extends Component {
   state = {
@@ -14,12 +14,14 @@ export class FAQ extends Component {
   // }
   componentDidMount() {
     console.log("COMPONENT did mount FAQ.js");
-    this.props.fetAllFAQS().then((result) => {
-      console.log("then result", result);
-    })
-    .then(data => {
-       console.log(data, "finally");
-    });
+    this.props
+      .fetAllFAQS()
+      .then(result => {
+        console.log("then result", result);
+      })
+      .then(data => {
+        console.log(data, "finally");
+      });
     // axios
     //   .get("http://localhost:3456/faqs/public/api/v1/static/list")
     //   .then(response => {
@@ -34,7 +36,7 @@ export class FAQ extends Component {
     //     console.log("finally here", response);
     //   });
   }
-  
+
   render() {
     return (
       <div className="container-fluid text-center">
@@ -107,10 +109,13 @@ export class FAQ extends Component {
   }
 }
 
-function mapStateToProps(state) {  
+function mapStateToProps(state) {
   return {
     data: state.data
   };
 }
 
-export default connect(mapStateToProps, { fetAllFAQS })(FAQ); 
+export default connect(
+  mapStateToProps,
+  { fetAllFAQS }
+)(FAQ);
