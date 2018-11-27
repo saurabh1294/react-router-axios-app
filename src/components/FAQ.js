@@ -11,33 +11,47 @@ export class FAQ extends Component {
     this.state = {
       response: {},
       title: "",
-      body: ""
+      body: "",
+      faqNum: -1
     };
+    this.showFAQ.bind(this);
   }
 
   componentWillReceiveProps(props) {
-    this.setState(
-      {
-        response: props.data
-      },
-      function() {
-        console.log("Received props from the reducer", this.state.response);
-        this.setState({ title: this.state.response[0].response.faqs[0].title });
-        this.setState({ body: this.state.response[0].response.faqs[0].body });
-      }
-    );
+    // if (this.state.faqNum === -1) {
+    //   this.setState(
+    //     {
+    //       response: props.data
+    //     },
+    //     () => {
+    //       this.setState({
+    //         title: this.state.response[0].response.faqs[0].title,
+    //         body: this.state.response[0].response.faqs[0].body
+    //       });
+    //     }
+    //   );
+    // }
+    // TODO - fix this
   }
 
   componentDidMount() {
     this.props.fetAllFAQS();
   }
 
-  showFAQ(faqNum) {
-    this.setState({
-      title: this.state.response[0].response.faqs[faqNum].title
-    });
-    this.setState({ body: this.state.response[0].response.faqs[faqNum].body });
-  }
+  showFAQ = faqId => {
+    this.setState(
+      {
+        response: this.props.data,
+        faqNum: faqId
+      },
+      () => {
+        this.setState({
+          title: this.state.response[0].response.faqs[faqId].title,
+          body: this.state.response[0].response.faqs[faqId].body
+        });
+      }
+    );
+  };
 
   render() {
     return (
@@ -52,17 +66,17 @@ export class FAQ extends Component {
           </div>
           <div className="col-sm-2 sidenav">
             <p>
-              <Link to={"/faqs"} onClick={this.showFAQ.bind(1)}>
+              <Link to={"#/"} onClick={() => this.showFAQ(0)}>
                 Link1
               </Link>
             </p>
             <p>
-              <Link to={"/faqs"} onClick={this.showFAQ.bind(2)}>
+              <Link to={"#/"} onClick={() => this.showFAQ(1)}>
                 Link2
               </Link>
             </p>
             <p>
-              <Link to={"/faqs"} onClick={this.showFAQ.bind(3)}>
+              <Link to={"#/"} onClick={() => this.showFAQ(2)}>
                 Link3
               </Link>
             </p>
