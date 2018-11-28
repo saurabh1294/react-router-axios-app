@@ -5,44 +5,26 @@ import { connect } from "react-redux";
 import { fetAllFAQS } from "../actions/actions";
 
 export class FAQ extends Component {
-  // TODO - implement constructor if needed
   constructor(props) {
     super(props);
     this.state = {
       response: {},
       title: "",
-      body: "",
-      faqNum: -1
+      body: ""
     };
     this.showFAQ.bind(this);
   }
 
-  componentWillReceiveProps(props) {
-    // if (this.state.faqNum === -1) {
-    //   this.setState(
-    //     {
-    //       response: props.data
-    //     },
-    //     () => {
-    //       this.setState({
-    //         title: this.state.response[0].response.faqs[0].title,
-    //         body: this.state.response[0].response.faqs[0].body
-    //       });
-    //     }
-    //   );
-    // }
-    // TODO - fix this
+  componentWillReceiveProps(nextProps) {
+    if (this.props.data.length !== nextProps.data.length) {
+      this.setProps(nextProps, 0);
+    }
   }
 
-  componentDidMount() {
-    this.props.fetAllFAQS();
-  }
-
-  showFAQ = faqId => {
+  setProps(props, faqId) {
     this.setState(
       {
-        response: this.props.data,
-        faqNum: faqId
+        response: props.data
       },
       () => {
         this.setState({
@@ -51,6 +33,14 @@ export class FAQ extends Component {
         });
       }
     );
+  }
+
+  componentDidMount() {
+    this.props.fetAllFAQS();
+  }
+
+  showFAQ = faqId => {
+    this.setProps(this.props, faqId);
   };
 
   render() {

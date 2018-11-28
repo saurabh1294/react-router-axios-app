@@ -8,25 +8,35 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand">FAQ knowledgebase</a>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                  <Link to={"/home"} className="nav-link">
-                    Home
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to={"/faqs"} className="nav-link">
-                    FAQs
-                  </Link>
-                </li>
-              </ul>
-              <hr />
+          <nav className="navbar navbar-inverse">
+            <div className="container-fluid">
+              <div className="navbar-header">
+                <button
+                  type="button"
+                  className="navbar-toggle"
+                  data-toggle="collapse"
+                  data-target="#myNavbar"
+                >
+                  <span className="icon-bar" />
+                  <span className="icon-bar" />
+                  <span className="icon-bar" />
+                </button>
+              </div>
+              <div className="collapse navbar-collapse" id="myNavbar">
+                <ul className="nav navbar-nav">
+                  <li className="nav-item">
+                    <Link to={"/home"} className="nav-link">
+                      Home
+                    </Link>
+                  </li>
+
+                  <li className="nav-item">
+                    <Link to={"/faqs"} className="nav-link">
+                      FAQs
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </nav>
           <Switch>
