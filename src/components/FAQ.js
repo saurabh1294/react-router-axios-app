@@ -76,13 +76,19 @@ export class FAQ extends Component {
         <div className="row content visible-xs">
           <div className="col-sm-2 sidenav">
             <p>
-              <a href="golibrary.co">Link1</a>
+              <Link to={"#/"} onClick={() => this.showFAQ(0)}>
+                Link1
+              </Link>
             </p>
             <p>
-              <a href="golibrary.co">Link2</a>
+              <Link to={"#/"} onClick={() => this.showFAQ(1)}>
+                Link2
+              </Link>
             </p>
             <p>
-              <a href="golibrary.co">Link3</a>
+              <Link to={"#/"} onClick={() => this.showFAQ(2)}>
+                Link3
+              </Link>
             </p>
           </div>
           <div className="col-sm-10 text-left">
